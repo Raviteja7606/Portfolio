@@ -3,12 +3,15 @@ import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import ScrollToTop from "./components/helper/scroll-to-top";
 import ToastProvider from "./components/ToastProvider";
-import GTM from "./components/GTM";
+import dynamic from "next/dynamic";
 
 import "./css/card.scss";
 import "./css/globals.scss";
 
 const inter = Inter({ subsets: ["latin"] });
+
+// GTM loaded ONLY on client side
+const GTM = dynamic(() => import("./components/GTM"), { ssr: false });
 
 export const metadata = {
   title: "Portfolio of Abu Said - Software Developer",
@@ -28,7 +31,7 @@ export default function RootLayout({ children }) {
         </main>
         <Footer />
 
-        {/* GTM client component */}
+        {/* GTM loads only on client now */}
         <GTM />
       </body>
     </html>
